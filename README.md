@@ -51,7 +51,7 @@
   github网址：https://github.com/hilongjw/vue-lazyload
   ```
 * `express-generator`生成器
-  ``` bash
+  ``` 
   npm install express-generator -S
   这是一个express自动生成插件
   ```
