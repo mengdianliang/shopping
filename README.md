@@ -65,6 +65,29 @@
 ### Node知识点
 由于node学的不是很好，所以这里总结一下感觉比较特别的一些基础知识。
 #### 数据库
+```
+显示数据库列表 show dbs
+创建一个demo数据库 use demo
+创建数据库表：db.createCollection("user")
+
+创建数据库集合并插入数据:
+db.users.insert({id: 123, name: "张三"})
+查看数据库集合：show collections
+删除数据库: db.dropDatabase()
+删除集合: db.user.drop() 
+
+插入数据：db.user.insert({id: 123, username: 'jack', age: 20, class: {name: 'imooc', num: 10}})
+查询数据并格式化：db.user.find().pretty()
+查询第一条数据：db.user.findOne()
+条件查询：db.user.find({'username': 'jack'})
+          db.user.find({'age': {$gt: 20}})		
+更新数据：db.user.update({username: "jack"}, {$set: {age: 30}})
+更新子数据：db.user.update({username: "jack"}, {$set: {'class.name': 'imooc-jack'}})
+
+删除数据：db.user.remove({id: 123})
+
+导入文件数据：mongoimport -d db_demo -c users --file E:/代码/project/v18dyy/resource/dumall-users
+```
 * 删除购物车商品
 ```
 router.post('/cartDel', function (req, res, next) {
