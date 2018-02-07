@@ -86,7 +86,7 @@
 ### 效果
 ![](https://github.com/mengdianliang/shopping/blob/master/show/goodlist.png)
 ![](https://github.com/mengdianliang/shopping/blob/master/show/cart.png)
-![](https://github.com/mengdianliang/my-music/blob/master/show/address.png)
+![](https://github.com/mengdianliang/shopping/blob/master/show/address.png)
 ![](https://github.com/mengdianliang/my-music/blob/master/show/order.png)
 ### 构建
 #### 开发环境
