@@ -63,23 +63,73 @@
   github网址：https://github.com/ElemeFE/vue-infinite-scroll
   ```
 ### Node知识点
-
-#### player组件
-播放器组件可谓是整个项目的核心,属于公共组件，通过`vuex`中`actions`来提交`mutations`，来播放列表、播放模式、当前播放歌曲状态管理。组件结构：
-全屏播放跟mini播放,有歌词展示，当前歌曲高亮展示，歌曲播放时间，进度条，上一首，下一首，暂停、开始等操作，这里需要用到html5播放器的知识。
-> 
-为了防止切换歌曲时点击速度过快导致歌曲播放错误，使用了`audio`的`onplay`API，结合`Vuex`获取到数据，判断当前歌曲数据请求到才可以切换下一首歌曲，判断函数如下
-``` javascript
- ready() {
-   this.songReady = true
- }
+由于node学的不是很好，所以这里总结一下感觉比较特别的一些基础知识。
+#### 数据库
+* 删除购物车商品
 ```
-#### 交互体验
-该项目的很多地方都涉及到滚动，包括下拉滚动，下拉滚动刷新等。这里面用到了一个库(`better-scroll`)，来实现所有涉及到的滚动，建议学习下它的[API](https://github.com/ustbhuangyi/better-scroll)。
+router.post('/cartDel', function (req, res, next) {
+  var userId = req.cookies.userId
+  var productId = req.body.productId
+  // $pull 要删除的数据
+  User.update({
+    userId: userId
+  }, {
+    $pull: {
+      'cartList': {
+        'productId': productId
+      }
+    }
+  },function (err, doc) {
+    if (err) {
+      res.json({
+        code: 1,
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      res.json({
+        code: 0,
+        msg: '',
+        result: 'suc'
+      })
+    }
+  })
+})
+```
+* 修改购物车商品数量
+```
+router.post("/cartEdit", function (req, res, next) {
+  var userId = req.cookies.userId
+  var productId = req.body.productId
+  var productNum = req.body.productNum
+  var checked = req.body.checked
 
-其他动画包括了`Vue`的`transition`动画，路由之间切换时的简单动画，播放器打开时的动画，这个地方比较难，也比较好玩。
+  // 更新子文档
+  User.update({"userId": userId, "cartList.productId": productId}, {
+    "cartList.$.productNum": productNum,
+    "cartList.$.checked": checked,
+    }, function (err,doc) {
+    if (err) {
+      res.json({
+        code: 1,
+        msg: err.message,
+        result: ''
+      });
+    } else {
+      res.json({
+        code: 0,
+        msg: '',
+        result: 'suc'
+      })
+    }
+  })
+})
+```
 
-打开页面时的加载Loading效果，其实就是一个Loading组件，也比较简单。
+### 交互体验
+该项目使用纯手写css样式，采用响应式布局，使用transition效果。使用到了分页加载插件`vue-infinite-scroll`，做到了下拉加载效果。
+
+通过原生js实现的进度条效果，详情请看https://github.com/mengdianliang/shopping/blob/master/src/components/progress/progress.vue
 
 为了减少流量，图片加载使用了懒加载的方式，滚动时再加载真实的图片。
 
@@ -87,7 +137,7 @@
 ![](https://github.com/mengdianliang/shopping/blob/master/show/goodlist.png)
 ![](https://github.com/mengdianliang/shopping/blob/master/show/cart.png)
 ![](https://github.com/mengdianliang/shopping/blob/master/show/address.png)
-![](https://github.com/mengdianliang/my-music/blob/master/show/order.png)
+![](https://github.com/mengdianliang/shopping/blob/master/show/order.png)
 ### 构建
 #### 开发环境
 
@@ -100,7 +150,7 @@ node server/app.js
 npm run dev
 ```
 ### 总结
-通过学习该项目，自己收获了许多，实践中也遇到了大大小小许多问题，通过断点调试，代码划分等最终解决了问题。发现vuex基础，js编码能力有待提升。
+通过学习该项目，对node又有了新的认识。虽然也有许多获取数据失败的问题，最多的还是node知识不扎实造成的，希望以后再node上多下点功夫。摁，加油！
 
 
 
