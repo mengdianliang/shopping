@@ -50,7 +50,7 @@
   import VueLazyload from 'vue-lazyload'
   github网址：https://github.com/hilongjw/vue-lazyload
   ```
-* express-generator
+* express-generator生成器
   ``` bash
   npm i -S express-generator
   这是一个express自动生成插件
