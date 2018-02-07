@@ -2,7 +2,7 @@
 
 --------
 ### 概述
-项目是基于Vue.js，成品是一个PC端的购物车。
+项目是基于Vue.js，成品是一个PC端的购物车。前端的许多操作都要传输到后台，所以这里node也是很重要的一部分。
 #### 模块划分
 > 
 * [x] 用户登陆登出
@@ -22,7 +22,7 @@
 *  Mongodb
 
 #### src目录结构
-* api：用来请求服务器端数据的，通过`jsonp`和`axios`发送请求，服务端代理，需要在`config/index.js`中设置代理接口
+* api：用来请求服务器端数据的，通过`axios`发送请求，服务端代理，需要在`config/index.js`中设置代理接口
     proxyTable: {
       '/api': {
         target: 'http://localhost:9000'
@@ -33,6 +33,15 @@
 * components: 存放一些视图组件
 * router: 配置路由
 * store: 一些共享状态管理
+
+#### server目录结构
+* bin：服务端启动项
+* models: 数据库模型
+* public: 服务端页面样式，文字，图片资源
+* routes: 服务端路由
+* util: 工具类文件
+* views: 返回给客户端的网页模板
+* app.js: 服务端入口文件
 
 #### 好用的插件
 * 图片懒加载
