@@ -168,7 +168,7 @@ router.post("/cartEdit", function (req, res, next) {
 # install dependencies
 npm install
 # start server
-node server/app.js
+node server/bin/www
 # serve with hot reload at localhost:8080
 npm run dev
 ```
