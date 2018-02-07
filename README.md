@@ -52,7 +52,7 @@
   ```
 * `express-generator`生成器
   ``` bash
-  npm i -S express-generator
+  npm install -S express-generator
   这是一个express自动生成插件
   ```
 * 分页加载vue-infinite-scroll
