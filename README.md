@@ -28,11 +28,11 @@
         target: 'http://localhost:9000'
       }
     }
-* base: 存放一些基础的组件 
-* common: 存放字体、图片、样式、工具类文件
-* components: 存放一些视图组件
+* assets: 存放样式资源
+* components: 存放一些基础组件
+* views: 存放一些视图组件
 * router: 配置路由
-* store: 一些共享状态管理
+* store: 一些共享状态管理(由于这里状态只有用户，购物车数量，所以直接写在了main.js文件中)
 
 #### server目录结构
 * bin：服务端启动项
@@ -50,25 +50,19 @@
   import VueLazyload from 'vue-lazyload'
   github网址：https://github.com/hilongjw/vue-lazyload
   ```
-* jsonp插件
+* express-generator
+  ``` bash
+  npm i -S express-generator
+  这是一个express自动生成插件
+  ```
+* 分页加载vue-infinite-scroll
   ``` bash
-  npm i -S jsonp
-  import originJSONP from 'jsonp'
-  github网址：https://github.com/webmodules/jsonp
+  npm install vue-infinite-scroll --save
+  import infiniteScroll from 'vue-infinite-scroll'
+  Vue.use(infiniteScroll)
+  github网址：https://github.com/ElemeFE/vue-infinite-scroll
   ```
-* 本地存储
-  ``` bash
-  npm install good-storage
-  import storage from 'good-storage'
-  github网址：https://github.com/ustbhuangyi/storage
-  ```
-* js-base64
-  ``` bash
-  npm install --save js-base64
-  import { Base64 } from 'js-base64'
-  github网址：https://github.com/dankogai/js-base64
-  ```
-### 难点
+### Node知识点
 
 #### player组件
 播放器组件可谓是整个项目的核心,属于公共组件，通过`vuex`中`actions`来提交`mutations`，来播放列表、播放模式、当前播放歌曲状态管理。组件结构：
